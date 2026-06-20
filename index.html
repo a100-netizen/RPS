@@ -1,0 +1,105 @@
+<script>
+console.log("Hello World")
+
+function getComputerChoice(){
+    const num = Math.floor(Math.random() * 3) + 1;
+    if (num === 1) {
+        return "ROCK"
+    }
+    else if (num === 2) {
+        return "PAPER"
+    }
+    else if (num === 3) {
+        return "SCISSORS"
+    }
+
+}
+
+
+function getHumanChoice(){
+
+
+    const input = prompt("What is your choice: ");
+    if (input === null) {
+        return "OK, maybe next time.";
+    }
+    else {
+        return input.toUpperCase();
+    }
+    
+}
+
+
+
+let humanScore = 0;
+let computerScore = 0;
+let gameRound = 0;
+
+//compares choices + updates scores
+function playRound(){
+
+    const humanSelection = getHumanChoice()
+    const computerSelection = getComputerChoice();
+
+    if (humanSelection === computerSelection) {
+        gameRound++
+        console.log(`It's a tie! You and the computer chose ${humanSelection}.`)
+
+    }
+
+    else if (
+        (humanSelection === "ROCK" && computerSelection === "SCISSORS") ||
+        (humanSelection === "PAPER" && computerSelection === "ROCK") ||
+        (humanSelection === "SCISSORS" && computerSelection === "PAPER") 
+    ) {
+        gameRound++;
+        humanScore++;
+        console.log(`You win, ${humanSelection} beats ${computerSelection}!`)
+
+        
+    }
+    else {
+        gameRound++;
+        computerScore++;
+        console.log(`You lost, ${computerSelection} beats ${humanSelection}.`)
+
+    }
+
+}
+
+function winnerIs(){
+    if (humanScore === computerScore) {
+        console.log("No winner. It's a tie")
+    }
+    else if (humanScore < computerScore) {
+        console.log("Computer wins!")
+    }
+    else if (humanScore > computerScore) {
+        console.log("You won!")
+    }
+
+}
+
+
+
+
+
+
+
+// run playRound() five times /
+function playGame(){
+    for (let i = 0; i < 5; ++i){
+        playRound()
+        console.log("Human Score: " + humanScore)
+        console.log("Computer Score: " + computerScore)
+        console.log("Round: " + gameRound)
+    }
+
+    winnerIs()
+
+}
+
+
+playGame()
+
+</script>
