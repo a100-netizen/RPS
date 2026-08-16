@@ -11,7 +11,7 @@
     <button id="paperButton">PAPER</button>
     <button id="scissorButton">SCISSORS</button>
 
-    <h3>Results:</h3>
+    <h3>Round Result:</h3>
     <div id="results">  
     </div>
 
@@ -106,7 +106,8 @@ function playRound(){
 
 
     gameRound++;
-    winnerDiv.innerHTML = "";
+    //winnerDiv.innerHTML = "";
+
     
 
     
@@ -179,7 +180,6 @@ function playRound(){
 
     if (gameRound == 5) {
         //winnerDiv.innerHTML = "";
-        gameRound = 0;
 
         winnerIs();
         
@@ -197,12 +197,26 @@ function playRound(){
     playAgain.id = "replay";
     playAgain.textContent = "Play Again?"
     playAgain.addEventListener("click", () => {
-        playRound();
-    })
+        playAgain.style.display = "none";
+        const gameRoundCount = document.querySelector("#gameRoundCounter");
+        gameRoundCount.textContent = gameRound;
+        humanScore = 0;
+        computerScore = 0;
+        gameRound = 0;
+        humanScoreCounter.textContent = humanScore;
+        computerScoreCounter.textContent = computerScore;
+        
+        winnerAnnounceHeading.textContent = "";
+        winnerAnnounce.textContent = "";
+        gameRoundDiv.appendChild(gameRoundCount);
+        //playAgain.style.display = "none";
+    });
+
 
 function winnerIs(){
 
     //gameRound = 0;
+    const gameRoundCount = document.querySelector("#gameRoundCounter");
 
 
     if (humanScore === computerScore) {
@@ -213,6 +227,9 @@ function winnerIs(){
         winnerDiv.appendChild(playAgain);
         humanScore = 0;
         computerScore = 0;
+        gameRound = 0;
+
+        playAgain.style.display = "block";
 
 
 
@@ -228,6 +245,10 @@ function winnerIs(){
         winnerDiv.appendChild(playAgain);
         humanScore = 0;
         computerScore = 0;
+        gameRound = 0;
+
+        playAgain.style.display = "block";
+
 
         //console.log("Computer wins!")
     }
@@ -239,6 +260,9 @@ function winnerIs(){
         winnerDiv.appendChild(playAgain);
         humanScore = 0;
         computerScore = 0;
+        gameRound = 0;
+
+        playAgain.style.display = "block";
 
         //console.log("You won!")
     }
